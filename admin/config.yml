@@ -1,0 +1,94 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+site_url: https://traveljems.co.uk
+display_url: https://traveljems.co.uk
+logo_url: /images/uploads/logo.png
+
+collections:
+
+  # ── BLOG POSTS ─────────────────────────────────────────────────
+  - name: "posts"
+    label: "✦ Blog Posts"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "post.html?slug={{slug}}"
+    fields:
+      - { label: "Title",          name: "title",    widget: "string" }
+      - { label: "Publish Date",   name: "date",     widget: "datetime" }
+      - label: "Region"
+        name: "region"
+        widget: "select"
+        options:
+          - "Africa"
+          - "Americas"
+          - "Asia"
+          - "Caribbean"
+          - "Europe"
+          - "Middle East"
+          - "Tips & Tricks"
+          - "Points & Miles"
+          - "Solo Travel"
+          - "Group Trips"
+      - { label: "Featured Post?", name: "featured", widget: "boolean", default: false }
+      - { label: "Cover Image",    name: "image",    widget: "image",   required: false }
+      - { label: "Short Excerpt",  name: "excerpt",  widget: "text",    hint: "1-2 sentences shown on the homepage. Keep it punchy." }
+      - { label: "Post Body",      name: "body",     widget: "markdown" }
+
+  # ── GALLERY ────────────────────────────────────────────────────
+  - name: "gallery"
+    label: "✦ Gallery"
+    files:
+      - label: "Photo Gallery"
+        name: "gallery"
+        file: "_data/gallery.json"
+        fields:
+          - name: "photos"
+            label: "Photos"
+            widget: "list"
+            fields:
+              - { label: "Image",       name: "image",    widget: "image" }
+              - { label: "Caption",     name: "caption",  widget: "string", required: false }
+              - { label: "Location",    name: "location", widget: "string", required: false }
+
+  # ── DESTINATIONS ───────────────────────────────────────────────
+  - name: "destinations"
+    label: "✦ Destinations"
+    files:
+      - label: "Destination Pages"
+        name: "destinations"
+        file: "_data/destinations.json"
+        fields:
+          - name: "destinations"
+            label: "Destinations"
+            widget: "list"
+            fields:
+              - { label: "Region",      name: "region",   widget: "select", options: ["Africa","Americas","Asia","Caribbean","Europe","Middle East"] }
+              - { label: "Name",        name: "name",     widget: "string" }
+              - { label: "Subtitle",    name: "subtitle", widget: "string", hint: "e.g. West · East · Southern Africa" }
+              - { label: "Cover Image", name: "image",    widget: "image",  required: false }
+
+  # ── SITE SETTINGS ──────────────────────────────────────────────
+  - name: "settings"
+    label: "✦ Site Settings"
+    files:
+      - label: "General Settings"
+        name: "general"
+        file: "_data/settings.json"
+        fields:
+          - { label: "Countries Visited",  name: "countries",  widget: "string", default: "35+" }
+          - { label: "Hero Video URL",     name: "heroVideo",  widget: "string", required: false, hint: "Paste a direct MP4 video URL. Leave blank to use the animated background." }
+          - { label: "Hero Title",         name: "heroTitle",  widget: "string", default: "Every jewel has a story." }
+          - { label: "Hero Slogan",        name: "heroSlogan", widget: "string", default: "Exploring the world, sharing its jewels." }
+          - { label: "About Text (Para 1)",name: "aboutText1", widget: "text" }
+          - { label: "About Text (Para 2)",name: "aboutText2", widget: "text" }
+          - { label: "Email Address",      name: "email",      widget: "string" }
+          - { label: "Instagram Handle",   name: "instagram",  widget: "string" }
+          - { label: "TikTok Handle",      name: "tiktok",     widget: "string" }
+          - { label: "Pinterest Handle",   name: "pinterest",  widget: "string" }
+          - { label: "YouTube URL",        name: "youtube",    widget: "string", required: false }
